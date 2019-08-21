@@ -14,5 +14,5 @@ script:
 after_success:
 - |
   if [[ "$TRAVIS_BRANCH" =~ master ]]; then
-    ./out/labels-syncker --token=$ACCESS_TOKEN --config=labels.yml
+    ./out/labels-syncker --token=$ACCESS_TOKEN --config=labels.yml -v=2 --logtostderr
   fi
