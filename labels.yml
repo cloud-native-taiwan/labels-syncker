@@ -1,0 +1,86 @@
+---
+cloud-native-taiwan:
+  fork: false
+  labels:
+  - name: lgtm
+    color: 1fe34a
+    description: Yeah! Looks good to me
+  - name: kind/bug
+    color: d73a4a
+    description: Something isn't working
+  - name: kind/hotfix
+    color: ff912b
+    description: We got a bomb, need to defuse it
+  - name: kind/do-not-merge
+    color: d93f0b
+    description: Something isn't working, do not merge it
+  - name: do-not-merge/work-in-progress
+    color: d93f0b
+    description: PR is work in progress, don not merge it
+  - name: question
+    color: d876e3
+    description: Further information is requested
+  - name: good first issue
+    color: 7057ff
+    description: Good for newcomers
+  - name: kind/feature
+    color: fbca04
+    description: New feature
+  - name: help wanted
+    color: 008672
+    description: Extra attention is needed
+  - name: improvement
+    color: d1e53b
+    description: Improvement of anythins
+  - name: duplicate
+    color: cfd3d7
+    description: This issue or pull request already exists.
+  - name: priority/important-longterm
+    color: eb6420
+    description: Important over the long term, but may not be staffed and/or may need multiple releases to complete.
+  - name: priority/important-soon
+    color: eb6420
+    description: Must be staffed and worked on either currently, or very soon, ideally in time for the next release.
+  # Meetup labels
+  - name: speech proposal
+    color: 008672
+    repositories:
+    - meetups
+  - name: COSCUP
+    color: 30107f
+    repositories:
+    - meetups
+  - name: meetup
+    color: 4165b5
+    repositories:
+    - meetups
+  # Jobs board labels
+  - name: Senior
+    color: 008672
+    repositories:
+    - jobs
+  - name: Junior
+    color: c0ef8d
+    repositories:
+    - jobs
+  - name: Work Remotely
+    color: a2eeef
+    repositories:
+    - jobs
+  - name: Working Out Of The Office
+    color: a2eeef
+    repositories:
+    - jobs
+  - name: Part time
+    color: fbca04
+    repositories:
+    - jobs
+  - name: 1M TWD+
+    color: fbca04
+    description: 1 million TWD+
+    repositories:
+    - jobs
+  - name: 公司資訊未明
+    color: FF0000
+    repositories:
+    - jobs
