@@ -18,13 +18,15 @@ import (
 var (
 	token  string
 	config string
+	ctx    = context.Background()
 )
 
 type Label struct {
-	Name         string   `yaml:"name"`
-	Description  string   `yaml:"description"`
-	Color        string   `yaml:"color"`
-	Repositories []string `yaml:"repositories"`
+	Name               string   `yaml:"name"`
+	Description        string   `yaml:"description"`
+	Color              string   `yaml:"color"`
+	Repositories       []string `yaml:"repositories"`
+	IgnoreRepositories []string `yaml:"ignoreRepositories"`
 }
 
 type Config struct {
@@ -68,6 +70,35 @@ func listLabels(client *github.Client, org, repo string) (mapset.Set, error) {
 	return newLabels, nil
 }
 
+func createOrUpdateLabels(client *github.Client, org, repo string, cfg Config, expectedLabels mapset.Set) error {
+	for _, l := range cfg.Labels {
+		if expectedLabels.Contains(l.Name) {
+			label := &github.Label{
+				Name:        &l.Name,
+				Description: &l.Description,
+				Color:       &l.Color,
+			}
+
+			glog.Infof("%s/%s: Creating or updating \"%s\" label ...", org, repo, l.Name)
+			_, resp, _ := client.Issues.GetLabel(ctx, org, repo, l.Name)
+			switch resp.StatusCode {
+			case http.StatusOK:
+				_, _, err := client.Issues.EditLabel(ctx, org, repo, l.Name, label)
+				if err != nil {
+					glog.Fatalf("%s/%s: Failed to update label, %+v.", org, repo, err)
+				}
+			case http.StatusNotFound:
+				_, _, err := client.Issues.CreateLabel(ctx, org, repo, label)
+				if err != nil {
+					glog.Fatalf("%s/%s: Failed to create label, %+v.", org, repo, err)
+				}
+			}
+			glog.Infof("%s/%s: The \"%s\" label has been done.", org, repo, l.Name)
+		}
+	}
+	return nil
+}
+
 func deleteLabels(client *github.Client, org, repo string, labels mapset.Set) error {
 	for _, l := range labels.ToSlice() {
 		r, err := client.Issues.DeleteLabel(context.Background(), org, repo, l.(string))
@@ -87,7 +118,6 @@ func main() {
 		glog.Fatalln(err)
 	}
 
-	ctx := context.Background()
 	ts := oauth2.StaticTokenSource(&oauth2.Token{AccessToken: token})
 	tc := oauth2.NewClient(ctx, ts)
 	client := github.NewClient(tc)
@@ -105,14 +135,18 @@ func main() {
 			}
 
 			expectedLabels := mapset.NewSet()
-			for _, label := range cfg.Labels {
-				if len(label.Repositories) > 0 {
-					if funk.ContainsString(label.Repositories, *repo.Name) {
-						expectedLabels.Add(label.Name)
+			for _, l := range cfg.Labels {
+				if funk.ContainsString(l.IgnoreRepositories, *repo.Name) {
+					continue
+				}
+
+				if len(l.Repositories) > 0 {
+					if funk.ContainsString(l.Repositories, *repo.Name) {
+						expectedLabels.Add(l.Name)
 					}
 					continue
 				}
-				expectedLabels.Add(label.Name)
+				expectedLabels.Add(l.Name)
 			}
 
 			if len(expectedLabels.ToSlice()) > 0 {
@@ -126,30 +160,8 @@ func main() {
 					glog.Fatalln(err)
 				}
 
-				for _, l := range cfg.Labels {
-					if expectedLabels.Contains(l.Name) {
-						label := &github.Label{
-							Name:        &l.Name,
-							Description: &l.Description,
-							Color:       &l.Color,
-						}
-
-						glog.Infof("%s/%s: Creating or updating \"%s\" label ...", org, *repo.Name, l.Name)
-						_, resp, _ := client.Issues.GetLabel(ctx, org, *repo.Name, l.Name)
-						switch resp.StatusCode {
-						case http.StatusOK:
-							_, _, err := client.Issues.EditLabel(ctx, org, *repo.Name, l.Name, label)
-							if err != nil {
-								glog.Fatalf("%s/%s: Failed to update label, %+v.", org, *repo.Name, err)
-							}
-						case http.StatusNotFound:
-							_, _, err := client.Issues.CreateLabel(ctx, org, *repo.Name, label)
-							if err != nil {
-								glog.Fatalf("%s/%s: Failed to create label, %+v.", org, *repo.Name, err)
-							}
-						}
-						glog.Infof("%s/%s: The \"%s\" label has been done.", org, *repo.Name, l.Name)
-					}
+				if err := createOrUpdateLabels(client, org, *repo.Name, cfg, expectedLabels); err != nil {
+					glog.Fatalln(err)
 				}
 			}
 		}

@@ -4,43 +4,65 @@ cloud-native-taiwan:
   labels:
   - name: lgtm
     color: 1fe34a
-    description: Yeah! Looks good to me
+    description: Yeah! Looks good to me.
+    ignoreRepositories:
+    - jobs
   - name: kind/bug
     color: d73a4a
-    description: Something isn't working
+    description: Something isn't working.
+    ignoreRepositories:
+    - jobs
   - name: kind/hotfix
     color: ff912b
-    description: We got a bomb, need to defuse it
+    description: We got a bomb, need to defuse it.
   - name: kind/do-not-merge
     color: d93f0b
-    description: Something isn't working, do not merge it
+    description: Something isn't working, do not merge it.
+    ignoreRepositories:
+    - jobs
   - name: do-not-merge/work-in-progress
     color: d93f0b
-    description: PR is work in progress, don not merge it
+    description: PR is work in progress, don not merge it.
   - name: question
     color: d876e3
-    description: Further information is requested
+    description: Further information is requested.
+    ignoreRepositories:
+    - jobs
   - name: good first issue
     color: 7057ff
-    description: Good for newcomers
+    description: Good for newcomers.
+    ignoreRepositories:
+    - jobs
   - name: kind/feature
     color: fbca04
-    description: New feature
+    description: New feature and request.
+    ignoreRepositories:
+    - jobs
   - name: help wanted
     color: 008672
-    description: Extra attention is needed
+    description: Extra attention is needed.
+    ignoreRepositories:
+    - jobs
   - name: improvement
     color: d1e53b
-    description: Improvement of anythins
+    description: Improvement of anythings.
+    ignoreRepositories:
+    - jobs
   - name: duplicate
     color: cfd3d7
     description: This issue or pull request already exists.
+    ignoreRepositories:
+    - jobs
   - name: priority/important-longterm
     color: eb6420
     description: Important over the long term, but may not be staffed and/or may need multiple releases to complete.
+    ignoreRepositories:
+    - jobs
   - name: priority/important-soon
     color: eb6420
     description: Must be staffed and worked on either currently, or very soon, ideally in time for the next release.
+    ignoreRepositories:
+    - jobs
   # Meetup labels
   - name: speech proposal
     color: 008672
@@ -77,7 +99,7 @@ cloud-native-taiwan:
     - jobs
   - name: 1M TWD+
     color: fbca04
-    description: 1 million TWD+
+    description: 1 million TWD+.
     repositories:
     - jobs
   - name: 公司資訊未明
