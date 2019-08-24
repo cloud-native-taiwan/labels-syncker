@@ -107,7 +107,7 @@ cloud-native-taiwan:
     description: Work Remotely.
     repositories:
     - jobs
- - name: 薪資資訊未明
+  - name: 薪資資訊未明
     color: FF0000
     description: Lack of salary range.
     repositories:
@@ -166,6 +166,3 @@ cloud-native-taiwan:
     description: 1 million TWD up per year.
     repositories: 
     - jobs
-
-
-      
