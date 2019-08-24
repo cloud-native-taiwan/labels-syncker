@@ -77,32 +77,95 @@ cloud-native-taiwan:
     repositories:
     - meetups
   # Jobs board labels
-  - name: Senior
-    color: 008672
+  - name: Kubernetes
+    color: 0075ca
+    repositories:
+    - jobs
+  - name: OpenStack
+    color: d73a4a
+    repositories:
+    - jobs
+  - name: SDN
+    color: d3944c
     repositories:
     - jobs
   - name: Junior
-    color: c0ef8d
+    color: A9F5A9
     repositories:
     - jobs
-  - name: Work Remotely
+  - name: Senior
+    color: 0B614B
+    repositories:
+    - jobs
+  - name: 海外
     color: a2eeef
+    description: Working overseas.
     repositories:
     - jobs
-  - name: Working Out Of The Office
-    color: a2eeef
+  - name: 遠端工作
+    color: 01DFD7
+    description: Work Remotely.
     repositories:
     - jobs
-  - name: Part time
-    color: fbca04
-    repositories:
-    - jobs
-  - name: 1M TWD+
-    color: fbca04
-    description: 1 million TWD+.
+ - name: 薪資資訊未明
+    color: FF0000
+    description: Lack of salary range.
     repositories:
     - jobs
   - name: 公司資訊未明
     color: FF0000
+    description: Lack of Company information.
     repositories:
     - jobs
+  - name: Part Time
+    color: FFBF00
+    repositories:
+    - jobs
+  - name: 30K TWD+
+    color: F5A9A9
+    description: 30 thousand TWD up per month.
+    repositories:
+    - jobs
+  - name: 40K TWD+
+    color: F7BE81
+    description: 40 thousand TWD up per month.
+    repositories:
+    - jobs
+  - name: 50K TWD+
+    color: F3F781
+    description: 50 thousand TWD up per month.
+    repositories:
+    - jobs
+  - name: 60K TWD+
+    color: BEF781
+    description: 60 thousand TWD up per month.
+    repositories:
+    - jobs
+  - name: 70K TWD+
+    color: 81DAF5
+    description: 70 thousand TWD up per month.
+    repositories:
+    - jobs
+  - name: 80K TWD+
+    color: E2A9F3
+    description: 80 thousand TWD up per month.
+    repositories:
+    - jobs
+  - name: 90K TWD+
+    color: BDBDBD
+    description: 90 thousand TWD up per month.
+    repositories:
+    - jobs
+  - name: 100K TWD+
+    color: 4000FF
+    description: 100 thousand TWD up per month.
+    repositories:
+    - jobs
+  - name: 年薪百萬
+    color: f9e6b8
+    description: 1 million TWD up per year.
+    repositories: 
+    - jobs
+
+
+      
