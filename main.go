@@ -79,7 +79,7 @@ func createOrUpdateLabels(client *github.Client, org, repo string, cfg Config, e
 				Color:       &l.Color,
 			}
 
-			glog.Infof("%s/%s: Creating or updating \"%s\" label ...", org, repo, l.Name)
+			glog.Infof("%s/%s: Creating or updating \"%s\" label.", org, repo, l.Name)
 			_, resp, _ := client.Issues.GetLabel(ctx, org, repo, l.Name)
 			switch resp.StatusCode {
 			case http.StatusOK:
